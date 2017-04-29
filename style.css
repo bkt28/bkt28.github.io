@@ -56,6 +56,10 @@ h1 {
 	margin-top: 0px;
 	padding-top: 20px;
 }
+h3 {
+	font-family: "Montserrat", sans-serif;
+	font-weight: normal;
+}
 h1, h4 {
 	font-family: "Montserrat", sans-serif;
 	text-align: center;
@@ -71,46 +75,60 @@ hr {
 	border-top: 1px dashed #fc7a23;
 	width: 900px;
 }
+.container {
+	width: 900px;
+	margin: 0px auto;
+}
 .highlight {
 	color: #2dcad8;
 	border-bottom: 1px dashed;
 }
 #about {
 	float: right;
-	padding-top: 25px;
-	width: 600px;
+	padding-top: 100px;
+	width: 515px;
 	font-size: 14px;
 }
 #about_container {
-	padding-top: 50px;
-	padding-bottom: 60px;
 	width: 900px;
 	margin: auto;
+	padding-bottom: 65px;
 }
 
 #copyright {
 	background: #ffffff;
 	color: #999999;
 	margin: 0px auto;
+	font-family: "Montserrat", sans-serif;
 	font-size: 10px;
 	text-align: right;
 	width: 900px;
+	height: 50px;
 	margin-bottom: 0px;
 	padding-top: 10px;
 }
 #resume {
 	border: 1px dashed #2dcad8;
 }
-#resume_container {
-	width: 900px;
-	margin: 0px auto;
-}
-#biography_container {
-	width: 900px;
-	margin: 0px auto;
-}
 #content {
 	background: #ffffff;
 	width: 100%;
 	margin: 0px auto;
+}
+#donut {
+	margin-top: 15px;
+}
+#donut_container {
+	padding-bottom: 10px;
+}
+#donut_text {
+	float: right;
+	width: 450px;
+}
+#main_image {
+	padding-top: 55px;
+	padding-left: 40px;
+}
+#skill_list {
+	column-count: 2;
 }
