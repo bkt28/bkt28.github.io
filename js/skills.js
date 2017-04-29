@@ -83,10 +83,10 @@ d3.csv("data/skills.csv", function (error, data) {
 		.on("mouseover", function () {
 			d3.select(this)
 			.style("cursor", "pointer")
-			.style("opacity", 0.75);
+			.style("opacity", 0.9);
 
 			d3.select("#" + id + "_arc")
-			.style("opacity", 0.75);
+			.style("opacity", 0.9);
 
 			updateSkills(id);
 		})
@@ -120,10 +120,10 @@ d3.csv("data/skills.csv", function (error, data) {
 			.style("cursor", "pointer");
 
 			d3.select("#" + id + "_circle")
-			.style("opacity", 0.75);
+			.style("opacity", 0.9);
 
 			d3.select("#" + id + "_arc")
-			.style("opacity", 0.75);
+			.style("opacity", 0.9);
 
 			updateSkills(id);
 		})
@@ -164,15 +164,15 @@ d3.csv("data/skills.csv", function (error, data) {
 	})
 	.on("mouseover", function (d) {
 		d3.select(this)
-		.style("opacity", 0.75)
+		.style("opacity", 0.9)
 		.style("cursor", "pointer");
 
 		if (d.data.category == "App development")
-			d3.select("#app_circle").style("opacity", 0.75);
+			d3.select("#app_circle").style("opacity", 0.9);
 		if (d.data.category == "Software engineering")
-			d3.select("#software_circle").style("opacity", 0.75);
+			d3.select("#software_circle").style("opacity", 0.9);
 		if (d.data.category == "Web development")
-			d3.select("#web_circle").style("opacity", 0.75);
+			d3.select("#web_circle").style("opacity", 0.9);
 
 		d3.select("#skill_category")
 		.text(d.data.category);
