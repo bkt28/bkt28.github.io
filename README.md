@@ -2,4 +2,4 @@
 
 Personal website
 
-[bkt28.github.io](http://bkt28.github.io)
+[brendanktaylor.com](http://brendanktaylor.com)
