@@ -132,11 +132,3 @@ hr {
 #skill_list {
 	column-count: 2;
 }
-#contact {
-	width: 600px;
-	float: left;
-}
-#contact_image {
-	float: right;
-	padding-bottom: 25px;
-}
