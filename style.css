@@ -129,6 +129,7 @@ hr {
 #main_image {
 	padding-top: 55px;
 	padding-left: 40px;
+	user-select: none;
 }
 #skill_list {
 	column-count: 2;
