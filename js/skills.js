@@ -91,8 +91,21 @@ function updateSkills (id) {
 	}
 }
 
+labelGroup = svg.append("g")
+.on("mouseleave", function () {
+	resetSkills();
+});
+
+labelGroup.append("rect")
+.attr("x", 107)
+.attr("y", 152)
+.attr("width", 168)
+.attr("height", 68)
+.attr("pointer-events", "all")
+.style("fill", "none");
+
 function appendCircle (id, cx, cy, fill) {
-	svg.append("circle")
+	labelGroup.append("circle")
 	.attr("id", id + "_circle")
 	.attr("cx", cx)
 	.attr("cy", cy)
@@ -115,7 +128,7 @@ function appendCircle (id, cx, cy, fill) {
 		d3.select("#" + id + "_arc")
 		.style("opacity", 1.0);
 
-		resetSkills();
+		//resetSkills();
 	});
 }
 
@@ -124,7 +137,7 @@ appendCircle("software", 115, 185, "#fc7a23");
 appendCircle("web", 115, 210, "#555555");
 
 function appendText (id, x, y, text) {
-	svg.append("text")
+	labelGroup.append("text")
 	.attr("id", id + "_text")
 	.attr("x", x)
 	.attr("y", y)
@@ -152,7 +165,7 @@ function appendText (id, x, y, text) {
 		d3.select("#" + id + "_arc")
 		.style("opacity", 1.0);
 
-		resetSkills();
+		//resetSkills();
 	});
 }
 
