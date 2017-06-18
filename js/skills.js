@@ -102,6 +102,7 @@ labelGroup.append("rect")
 .attr("width", 168)
 .attr("height", 68)
 .attr("pointer-events", "all")
+.style("cursor", "pointer")
 .style("fill", "none");
 
 function appendCircle (id, cx, cy, fill) {
