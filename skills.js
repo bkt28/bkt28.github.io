@@ -4,15 +4,47 @@ var radius = width / 2;
 var donutWidth = 40;
 
 var data = [
-	{category: "web", skills: ["HTML/CSS", "JavaScript",
-		"Interactive data visualizations", "D3.js"]},
-	{category: "software", skills: ["Java", "C/C++", "Python", "OCaml",
+	{category: "web", skills: [
+		"HTML/CSS",
 		"JavaScript",
-		"Git", "Object-oriented programming", "Functional programmming",
-		"Data structures", "Assembly language", "Processor design",
-		"Public key cryptography", "Ranking and search algorithms"]},
-	{category: "app", skills: ["iOS development", "Android development",
-		"Java", "Swift", "Objective-C", "Xcode", "Android Studio"]}];
+		"Interactive data visualization",
+		"D3.js"
+	]},
+
+	{category: "software", skills: [
+		"Java",
+		"C/C++",
+		"Python",
+		"OCaml",
+		"JavaScript",
+		"Git",
+		"Object-oriented programming",
+		"Functional programmming",
+		"Data structures",
+		"Assembly language",
+		"Processor design",
+		"Public key cryptography",
+		"Ranking and search algorithms"]},
+
+	{category: "app", skills: [
+		"iOS development",
+		"Android development",
+		"Swift",
+		"Objective-C",
+		"Xcode",
+		"Android Studio"]}
+];
+
+var htmlString = "";
+
+data.forEach(function (d) {
+	d.skills.forEach(function (skill) {
+		htmlString += skill + "<br>";
+	});
+});
+
+d3.select("#skill_list")
+.html(htmlString);
 
 var arc = d3.arc()
 .innerRadius(radius - donutWidth)
@@ -31,31 +63,7 @@ function resetSkills () {
 	.text("All skills");
 
 	d3.select("#skill_list")
-	.html("iOS development<br>" +
-		"Android development<br>" +
-		"Java<br>" +
-		"Swift<br>" +
-		"Objective-C<br>" +
-		"Android Studio<br>" +
-		"Xcode<br>" +
-		"C/C++<br>" +
-		"Python<br>" +
-		"OCaml<br>" +
-		"Git<br>" +
-		"Object-oriented programming<br>" +
-		"Functional programming<br>" +
-		"Data structures<br>" +
-		"User experience design<br>" +
-		"HTML/CSS<br>" +
-		"JavaScript<br>" +
-		"Interactive data visualizations<br>" +
-		"D3.js<br>" +
-		"Assembly language<br>" +
-		"Processor design<br>" +
-		"Finite automana<br>" +
-		"Public key cryptography<br>" +
-		"Ranking and search algorithms<br>" +
-		"Graph theory and social networks");
+	.html(htmlString);
 
 	d3.select("#skill_list")
 	.style("column-count", 2);
