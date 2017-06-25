@@ -44,7 +44,7 @@ data.forEach(function (d) {
 });
 
 function makeSkillString (category) {
-	category.forEach(function (skill) {
+	category.skills.forEach(function (skill) {
 		htmlString += skill + "<br>";
 	});
 }
