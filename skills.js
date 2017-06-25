@@ -43,8 +43,8 @@ function makeSkillString (category) {
 	});
 }
 
-makeSkillString(data[1]);
 makeSkillString(data[2]);
+makeSkillString(data[1]);
 makeSkillString(data[0]);
 
 d3.select("#skill_list")
