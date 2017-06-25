@@ -43,6 +43,16 @@ data.forEach(function (d) {
 	});
 });
 
+function makeSkillString (category) {
+	category.forEach(function (skill) {
+		htmlString += skill + "<br>";
+	});
+}
+
+makeSkillString(data[1]);
+makeSkillString(data[2]);
+makeSkillString(data[0]);
+
 d3.select("#skill_list")
 .html(htmlString);
 
