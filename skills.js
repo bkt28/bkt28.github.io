@@ -37,12 +37,6 @@ var data = [
 
 var htmlString = "";
 
-data.forEach(function (d) {
-	d.skills.forEach(function (skill) {
-		htmlString += skill + "<br>";
-	});
-});
-
 function makeSkillString (category) {
 	category.skills.forEach(function (skill) {
 		htmlString += skill + "<br>";
