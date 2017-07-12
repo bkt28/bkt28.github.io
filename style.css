@@ -95,7 +95,9 @@ hr {
 	margin: auto;
 	padding-bottom: 65px;
 }
-
+#bio {
+	text-align: justify;
+}
 #copyright {
 	background: #ffffff;
 	color: #999999;
