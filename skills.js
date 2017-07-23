@@ -23,7 +23,6 @@ var data = [
 		"Data structures",
 		"Assembly language",
 		"Processor design",
-		"Public key cryptography",
 		"Ranking and search algorithms"]},
 
 	{category: "app", skills: [
@@ -32,7 +31,10 @@ var data = [
 		"Swift",
 		"Objective-C",
 		"Xcode",
-		"Android Studio"]}
+		"Android Studio",
+		"CocoaPods",
+		"Starscream",
+		"ObjectMapper"]}
 ];
 
 var htmlString = "";
