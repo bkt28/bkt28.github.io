@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Traffic Fatalities in the United States, 1899-2016</title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="jobs.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<style>
+body { margin: auto; font-family: "Montserrat", sans-serif; }
+h1 { font-family: "Lora", serif; text-align: center; padding-top: 10px; }
+svg { display: block; margin: auto; }
+.bar rect { fill: #ccc; }
+.axis path { fill: none; stroke: black;}
+.axis line { stroke: black; }
+.axis text { font-family: "Montserrat", sans-serif; font-size: x-small; }
+path.timeseries { fill: none; stroke: #aaa; stroke-width: 3; }
+</style>
+</head>
+<body>
+<h1>Traffic Fatalities in the United States, 1899-2016</h1>
+<div id="plot"></div>
+</body>
+</html>
+<script>
+
+var height = 500;
+var width = 900;
+var padding = 75;
+
+var svg = d3.select("#plot").append("svg")
+.attr("height", height)
+.attr("width", width);
+
+function parseLine (row) {
+	return {
+		year: Date.parse(row["year"]),
+		fatalities: Number(row["fatalities"].replace(/,/g, ""))
+	};
+}
+
+d3.tsv("fatalities.txt", parseLine, function (error, data) {
+	var minYear = d3.min(data, function (d) { return d.year; });
+	var maxYear = d3.max(data, function (d) { return d.year; });
+
+	var minFatalities = d3.min(data, function (d) { return d.fatalities; });
+	var maxFatalities = d3.max(data, function (d) { return d.fatalities; });
+
+	var xScale = d3.scaleLinear().domain([minYear, maxYear])
+		.range([padding, width - padding]);
+
+	var yScale = d3.scaleLinear().domain([minFatalities, maxFatalities])
+		.range([height - padding, padding]);
+
+	var xAxis = d3.axisBottom().scale(xScale)
+		.tickFormat(d3.timeFormat("%Y"));
+
+	svg.append("g")
+	.attr("class", "axis")
+	.attr("transform", "translate(0, " + (height - padding) + ")")
+	.call(xAxis);
+
+	var yAxis = d3.axisLeft().scale(yScale);
+
+	svg.append("g")
+	.attr("class", "axis")
+	.attr("transform", "translate(" + padding + ", " + (0) + ")")
+	.call(yAxis);
+
+	var line = d3.line()
+	.x(function (d) { return xScale(d.year); })
+	.y(function (d) { return yScale(d.fatalities); });
+
+	svg.append("path")
+	.attr("d", line(data))
+	.style("stroke", "orangered")
+	.style("stroke-width", 2)
+	.style("fill", "none");
+
+	svg.append("text")
+	.attr("x", width - padding)
+	.attr("y", height)
+	.attr("alignment-baseline", "top")
+	.attr("text-anchor", "end")
+	.style("font-family", "'Montserrat', sans-serif")
+	.style("font-size", "10px")
+	.style("fill", "#777777")
+	.text("SOURCE: NATIONAL SAFETY COUNCIL");
+});
+
+</script>
