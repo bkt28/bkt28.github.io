@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manufacturing Jobs in the United States</title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="jobs.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<style>
+body { margin: auto; font-family: "Montserrat", sans-serif; }
+h1 { font-family: "Lora", serif; text-align: center; }
+svg { display: block; margin: auto; }
+.bar rect { fill: #ccc; }
+.axis path { fill: none; stroke: black;}
+.axis line { stroke: black; }
+.axis text { font-family: "Montserrat", sans-serif; font-size: x-small; }
+path.timeseries { fill: none; stroke: #333; stroke-width: 3; opacity: 0.4; }
+</style>
+</head>
+<body>
+<h1>Manufacturing Jobs in the United States, 1990-2016</h1>
+<div id="jobsPlot"></div>
+</body>
+</html>
