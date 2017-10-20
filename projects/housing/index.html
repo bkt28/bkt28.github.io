@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Housing Affordability in America</title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+<style>
+body { width: 900px; margin: auto; font-family: "Lato", sans-serif; color: #ffffff; background-color: #23ceea; }
+h1 { font-family: "Lato", serif; font-size: 56px; font-weight: bold; text-align: center; padding-top: 10px; color: #ffffff; }
+p { line-height: 22px; }
+svg { display: block; margin: auto; }
+#plot { padding-bottom: 50px; }
+#source { font-size: 12px; text-align: left; }
+::selection {
+	background: #faff00;
+}
+</style>
+</head>
+<body>
+<h1>Housing Affordability in America</h1>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam varius, nunc sed molestie 
+feugiat, enim enim efficitur justo, in pulvinar magna velit sit amet dui. Etiam sodales 
+nibh sed odio convallis blandit. Phasellus vitae interdum odio. Curabitur ultrices magna 
+erat, eu vestibulum odio accumsan vitae. In fringilla at urna at rutrum. Fusce ultrices 
+ipsum ut faucibus luctus. Nullam tincidunt suscipit nisi, eu rutrum ante molestie id. 
+Phasellus purus augue, pulvinar eget erat lobortis, pulvinar vehicula magna. Duis vel 
+dignissim magna, a scelerisque lorem. Maecenas turpis felis, cursus vel hendrerit et, 
+commodo feugiat ipsum. Nunc iaculis turpis et mi aliquam posuere.
+</p>
+<div id="plot"></div>
+<div id="source">
+<p>SOURCE: US CENSUS BUREAU</p>
+</div>
+</body>
+</html>
+<script>
+var width = 900;
+var height = 26220;
+var strokeWidth = 4;
+
+var svg = d3.select("#plot").append("svg")
+.attr("height", height)
+.attr("width", width);
+
+svg.append("line")
+.attr("x1", strokeWidth / 2)
+.attr("y1", 0)
+.attr("x2", strokeWidth / 2)
+.attr("y2", height)
+.style("stroke", "#ffffff")
+.style("stroke-width", strokeWidth);
+
+function parseLine (row) {
+	return {
+		city: String(row["Geo_QName"]).split('-')[0].split('(')[0],
+		percentage: Number(row["SE_T105_001"]).toFixed(1)
+	};
+}
+
+d3.csv("data.csv", parseLine, function (error, data) {
+	data.sort(function (a, b) { return d3.descending(a["percentage"], b["percentage"]); });
+
+	var min = d3.min(data, function (d) { return d.percentage; });
+	var max = d3.max(data, function (d) { return d.percentage; });
+
+	var xScale = d3.scaleLinear().domain([min - 0.5, max]).range([width, 150 + strokeWidth / 2]);
+	var yScale = d3.scaleLinear().domain([0, data.length]).range([45 + strokeWidth / 2, height]);
+
+	data.forEach(function (d, i) {
+		svg.append("rect")
+		.attr("x", 0)
+		.attr("y", yScale(i) - 15)
+		.attr("width", width - xScale(d.percentage))
+		.attr("height", 30)
+		.style("fill", "none")
+		.style("stroke", "#ffffff")
+		.style("stroke-width", strokeWidth)
+		.style("cursor", "pointer")
+		.on("mouseenter", function () {
+			d3.select(this)
+			.style("fill", "#ffffff");
+		})
+		.on("mouseleave", function () {
+			d3.select(this)
+			.style("fill", "none");
+		});
+
+		svg.append("text")
+		.attr("x", width - xScale(d.percentage) + 10)
+		.attr("y", yScale(i))
+		.attr("alignment-baseline", "middle")
+		.attr("text-anchor", "start")
+		.style("font-family", "'Lato', sans-serif")
+		.style("fill", "#ffffff")
+		.text(d.city + " " + d.percentage + "%");
+	});
+});
+
+</script>
