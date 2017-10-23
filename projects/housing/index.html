@@ -43,8 +43,6 @@ commodo feugiat ipsum. Nunc iaculis turpis et mi aliquam posuere.
 </body>
 </html>
 <script>
-var cities = [84493, 18748, 9298, 47854, 32167, 56602];
-
 function parseLine (row) {
 	return {
 		city: String(row["Geo_QName"]),
@@ -60,12 +58,14 @@ d3.csv("data.csv", parseLine, function (error, data) {
 			data.splice(i, 1);
 	});
 
+	var numberOfCities = 10;
+
 	data.sort(function (a, b) { return d3.descending(a.percentage, b.percentage); });
-	var leastAffordable = data.slice(0, 25);
-	var mostAffordable = data.slice(data.length - 25);
+	var leastAffordable = data.slice(0, numberOfCities);
+	var mostAffordable = data.slice(data.length - numberOfCities);
 
 	data.sort(function (a, b) { return d3.descending(a.population, b.population); });
-	var topCities = data.slice(0, 25);
+	var topCities = data.slice(0, numberOfCities);
 	topCities.sort(function (a, b) { return d3.descending(a.percentage, b.percentage); });
 
 	var barHeight = 30;
