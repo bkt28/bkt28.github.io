@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mass Shooting Deaths in the United States, 2007 - 2017</title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<style>
+body { margin: auto; font-family: "Montserrat", sans-serif; background-color: #000000; }
+h1 { font-family: "Lora", serif; text-align: center; padding-top: 10px; color: #ffffff; }
+svg { display: block; margin: auto; }
+.axis path { fill: none; stroke: black;}
+.axis line { stroke: black; }
+.axis text { font-family: "Montserrat", sans-serif; font-size: x-small; fill: black; }
+path.timeseries { fill: none; stroke: #aaa; stroke-width: 3; }
+</style>
+</head>
+<body>
+<h1>Mass Shooting Deaths in the United States, 2007 - 2017</h1>
+<div id="plot"></div>
+</body>
+</html>
+<script>
+
+var height = 500;
+var width = 1048;
+var padding = 75;
+
+var svg = d3.select("#plot").append("svg")
+.attr("height", height)
+.attr("width", width);
+
+function parseLine (row) {
+	return {
+		deaths: Number(row["deaths"])
+	};
+}
+
+d3.tsv("deaths.txt", parseLine, function (error, data) {
+	var maxDeaths = d3.max(data, function (d) { return d.deaths; });
+
+	var xScale = d3.scaleLinear().domain([0, data.length])
+		.range([padding, width - padding]);
+
+	var yScale = d3.scaleLinear().domain([0, maxDeaths])
+		.range([height - padding, padding]);
+
+	var xAxis = d3.axisBottom().scale(xScale);
+
+	svg.append("g")
+	.attr("class", "axis")
+	.attr("transform", "translate(0, " + (height - padding) + ")")
+	.call(xAxis);
+
+	var yAxis = d3.axisLeft().scale(yScale);
+
+	svg.append("g")
+	.attr("class", "axis")
+	.attr("transform", "translate(" + padding + ", " + (0) + ")")
+	.call(yAxis);
+
+	data.forEach(function (d, i) {
+		svg.append("rect")
+		.attr("x", xScale(i))
+		.attr("y", yScale(d.deaths))
+		.attr("width", 20)
+		.attr("height", height - yScale(d.deaths) - padding)
+		.style("fill", "orangered");
+	});
+
+	svg.append("text")
+	.attr("x", width - padding)
+	.attr("y", height)
+	.attr("alignment-baseline", "top")
+	.attr("text-anchor", "end")
+	.style("font-family", "'Montserrat', sans-serif")
+	.style("font-size", "10px")
+	.style("fill", "#777777")
+	.text("SOURCE: THE NEW YORK TIMES");
+});
+
+</script>
