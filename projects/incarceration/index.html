@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Incarceration in the United States</title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
+<style>
+body { font-family: "Raleway", sans-serif; text-align: center; margin: auto; width: 900px; }
+h1, h5 { font-family: "Lora", sans-serif; text-align: center; }
+h5 { font-family: "Raleway", sans-serif; }
+p { line-height: 22px; text-align: center; }
+svg { display:block; margin:auto; }
+#source { font-family: "Montserrat", sans-serif; font-size: 10px; text-align: right; }
+</style>
+</head>
+<body>
+<h1>Incarceration in the United States</h1>
+<h5>By Brendan Taylor</h5>
+<!-- <br><br>
+<p>The number of individuals incarcerated in each U.S. state,
+per 100,000 residents.</p>
+<br><br> -->
+<svg id="map" width="900" height="750">
+</svg>
+<p id="source">SOURCES: BUREAU OF JUSTICE STATISTICS, US CENSUS</p>
+</body>
+</html>
+<script>
+    var svg = d3.select("#map");
+
+    // Data for each state
+    var stateData = [];
+
+    var censusData;
+    var prisonData;
+
+    // Function to sort by state abbreviation
+    function sortById (a, b) {
+        var x = a.id;
+        var y = b.id;
+        if (x < y) return -1;
+        if (x > y) return 1;
+        return 0;
+    }
+
+    // Assign coordinates to each state
+    var states = [
+        {id:"ME", x:10, y:0},
+        {id:"AK", x:0, y:1},
+        {id:"WI", x:6, y:1},
+        {id:"VT", x:9, y:1},
+        {id:"NH", x:10, y:1},
+        {id:"WA", x:1, y:2},
+        {id:"ID", x:2, y:2},
+        {id:"MT", x:3, y:2},
+        {id:"ND", x:4, y:2},
+        {id:"MN", x:5, y:2},
+        {id:"IL", x:6, y:2},
+        {id:"MI", x:7, y:3},
+        {id:"NY", x:8, y:2},
+        {id:"MA", x:9, y:2},
+        {id:"OR", x:1, y:3},
+        {id:"NV", x:2, y:3},
+        {id:"WY", x:3, y:3},
+        {id:"SD", x:4, y:3},
+        {id:"IA", x:5, y:3},
+        {id:"IN", x:6, y:3},
+        {id:"OH", x:7, y:4},
+        {id:"PA", x:8, y:3},
+        {id:"NJ", x:9, y:3},
+        {id:"CT", x:10, y:3},
+        {id:"RI", x:11, y:3},
+        {id:"CA", x:1, y:4},
+        {id:"UT", x:2, y:4},
+        {id:"CO", x:3, y:4},
+        {id:"NE", x:4, y:4},
+        {id:"MO", x:5, y:4},
+        {id:"KY", x:6, y:4},
+        {id:"WV", x:7, y:5},
+        {id:"VA", x:8, y:4},
+        {id:"MD", x:9, y:4},
+        {id:"DE", x:10, y:4},
+        {id:"AZ", x:2, y:5},
+        {id:"NM", x:3, y:5},
+        {id:"KS", x:4, y:5},
+        {id:"AR", x:5, y:5},
+        {id:"TN", x:6, y:5},
+        {id:"NC", x:8, y:5},
+        {id:"SC", x:8, y:6},
+        {id:"OK", x:3, y:6},
+        {id:"LA", x:4, y:6},
+        {id:"MS", x:5, y:6},
+        {id:"AL", x:6, y:6},
+        {id:"GA", x:7, y:6},
+        {id:"HI", x:0, y:7},
+        {id:"TX", x:3, y:7},
+        {id:"FL", x:9, y:7}
+    ];
+
+    states.sort(sortById);
+
+    // Fetch census data for each state
+    d3.csv("census_data.csv", function (error, data) {
+        censusData = data;
+        for (var i = 0; i < censusData.length; i++) {
+            if ((censusData[i].STATE_OR_REGION != "United States") &&
+                (censusData[i].STATE_OR_REGION != "Puerto Rico") &&
+                (censusData[i].STATE_OR_REGION != "DC")) {
+                    stateData.push({
+                        id: censusData[i].STATE_OR_REGION,
+                        population: Number(censusData[i].POPULATION_2010)
+                    });
+                }
+        }
+
+        stateData.sort(sortById);
+
+        prisonData = [];
+
+        // Fetch prison data for each state
+        d3.csv("prison_data.csv", function (error, data) {
+            for (var i = 0; i < data.length; i++) {
+                if ((data[i].YEAR == 2010) && (data[i].STATE != "ST") &&
+                    (data[i].STATE != "US") && (data[i].STATE != "FE") &&
+                    (data[i].STATE != "DC"))
+                    prisonData.push(data[i]);
+            }
+
+            // Sort prison data by state abbreviation
+            prisonData.sort(function (a, b) {
+                var x = a.STATE;
+                var y = b.STATE;
+                if (x < y) return -1;
+                if (x > y) return 1;
+                return 0;
+            });
+
+            // stateData and prisonData are both sorted by state abbreviation
+            // Transfer data from states to stateData
+            for (var i = 0; i < prisonData.length; i++) {
+                stateData[i].count = Number(prisonData[i].CUSTOTM) +
+                    Number(prisonData[i].CUSTOTF);
+                stateData[i].x = states[i].x;
+                stateData[i].y = states[i].y;
+            }
+
+            for (var i = 0; i < stateData.length; i++) {
+                // Calculate incarceration rate per 100000
+                var score = stateData[i].count / stateData[i].population * 1000;
+
+                // Position a colored square on the map for each state
+                svg.append("rect")
+                .attr("x", 75 * stateData[i].x)
+                .attr("y", 75 * stateData[i].y)
+                .attr("width", 75)
+                .attr("height", 75)
+                .attr("fill", function () {
+                    if (score < 2.5)
+                        return "#fed777";
+                    else if (score < 3.75)
+                        return "#fc6902";
+                    else if (score < 4.5)
+                        return "#fda13d";
+                    return "#cd4801"
+                })
+                .attr("stroke", "#FFFFFF")
+                .attr("stroke-width", 4);
+
+                // Label each square with state abbreviation
+                svg.append("text")
+                .attr("x", 75 * stateData[i].x + 75/2)
+                .attr("y", 75 * stateData[i].y + 75/2)
+                .attr("text-anchor", "middle")
+                .attr("alignment-baseline", "central")
+                .attr("font-family", "'Open Sans', sans-serif")
+                .attr("font-size", 24)
+                .attr("fill", "#FFFFFF")
+                .text(stateData[i].id);
+            }
+        });
+    });
+
+    // Adds labels on legend
+    function addLegendLabels(x, text) {
+        svg.append("text")
+        .attr("x", 75 * x + 75/2)
+        .attr("y", 700)
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central")
+        .attr("font-family", "'Raleway', sans-serif")
+        .attr("font-size", 12)
+        .text(text);
+    }
+
+    // Add rectangles of color on legends
+    function addLegendRects(x, color) {
+        svg.append("rect")
+        .attr("x", 75 * x)
+        .attr("y", 75 * 9)
+        .attr("width", 75)
+        .attr("height", 10)
+        .attr("fill", color)
+        .attr("stroke", "#FFFFFF")
+        .attr("stroke-width", 4);
+    }
+
+    // Attach legend
+    svg.append("text")
+    .attr("x", 75 * 6)
+    .attr("y", 75 * 8.75)
+    .attr("text-anchor", "middle")
+    .attr("alignment-baseline", "central")
+    .attr("font-family", "'Raleway', sans-serif")
+    .attr("font-size", 14)
+    .text("Incarcerations per 100,000 residents");
+
+    addLegendLabels(4, "0 - 2.49");
+    addLegendLabels(5, "2.5 - 3.74");
+    addLegendLabels(6, "3.75 - 4.49");
+    addLegendLabels(7, "4.5 - 7.5");
+
+    addLegendRects(4, "#fed777");
+    addLegendRects(5, "#fda13d");
+    addLegendRects(6, "#fc6902");
+    addLegendRects(7, "#cd4801");
+</script>
