@@ -1,0 +1,110 @@
+a {
+	/*transition: all 0.2s linear;*/
+}
+a.navigation {
+	padding: 5px;
+}
+a.navigation:link {
+	color: #666666;
+	text-decoration: none;
+}
+a.navigation:visited {
+	color: #666666;
+	text-decoration: none;
+}
+a.navigation:hover {
+	color: #96191d;
+	text-decoration: none;
+}
+body {
+	background: #96191d;
+	font-family: "Proxima Nova", sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+h1 {
+	color: #96191d;
+	text-align: center;
+}
+li {
+	padding-bottom: 10px;
+}
+td {
+	text-align: center;
+	width: 300px;
+}
+.anchor {
+	padding-top: 85px;
+}
+.list {
+	column-count: 3;
+}
+.sticky {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+}
+.sticky + #container {
+	padding-top: 85px;
+}
+.sticky + #footer {
+	padding-top: 85px;
+}
+#contact {
+	color: #ffffff;
+	margin: 0px auto;
+	padding: 10px;
+	padding-top: 50px;
+}
+#container {
+	background-color: #ffffff;
+}
+#content {
+	background-color: #ffffff;
+	line-height: 22px;
+	margin: 0px auto;
+	padding-bottom: 85px;
+	width: 950px;
+}
+#copyright {
+	color: #ffffff;
+	font-size: 12px;
+	padding-top: 50px;
+	text-align: center;
+	vertical-align: bottom;
+}
+#footer {
+	background-color: #96191d;
+	height: 200px;
+	margin: 0px;
+	padding: 0px;
+}
+#header {
+	background-color: #ffffff;
+	height: 80px;
+	padding-bottom: 10px;
+}
+#logo {
+	padding-left: 50px;
+	padding-top: 10px;
+	user-select: none;
+}
+#main {
+	background-color: #999999;
+	font-size: 72px;
+	height: 400px;
+	text-align: center;
+}
+#navigation {
+	float: right;
+	padding-top: 15px;
+	padding-right: 50px;
+}
+#bottom_stripe {
+	background-color: #96191d;
+	height: 100px;
+}
+#top_stripe {
+	background-color: #96191d;
+	height: 5px;
+}
