@@ -1,5 +1,5 @@
 a {
-	/*transition: all 0.2s linear;*/
+	color: #000000;
 }
 a.navigation {
 	padding: 5px;
@@ -18,26 +18,60 @@ a.navigation:hover {
 }
 body {
 	background: #96191d;
-	font-family: "Proxima Nova", sans-serif;
+	font-family: "Open Sans", sans-serif;
 	margin: 0px;
 	padding: 0px;
 }
 h1 {
 	color: #96191d;
+	font-family: "Playfair Display", serif;
+	font-size: 48px;
+	text-align: center;
+}
+h2 {
+	color: #96191d;
+	text-align: center;
+}
+h4 {
 	text-align: center;
 }
 li {
 	padding-bottom: 10px;
 }
-td {
+.footer_table {
 	text-align: center;
 	width: 300px;
 }
 .anchor {
 	padding-top: 85px;
 }
+.clients td {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	padding-right: 50px;
+	width: 200px;
+}
+.clients img {
+	width: 200px;
+}
+.end {
+	padding-right: 0px;
+}
 .list {
 	column-count: 3;
+}
+.portrait {
+	display: block;
+	width: 200px;
+	margin: 0px auto;
+	padding-bottom: 25px;
+}
+.quote {
+	font-family: "Playfair Display", serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 22px;
+	text-align: center;
 }
 .sticky {
 	position: fixed;
@@ -50,32 +84,56 @@ td {
 .sticky + #footer {
 	padding-top: 85px;
 }
-#contact {
-	color: #ffffff;
-	margin: 0px auto;
-	padding: 10px;
-	padding-top: 50px;
+.statements td {
+	background-color: #dddddd;
+	font-weight: bolder;
+	padding: 5px;
+	text-align: center;
+	width: 134px;
+}
+.statements {
+	border-spacing: 5px;
+}
+.statements_2 td {
+	background-color: #dddddd;
+	font-weight: bolder;
+	padding: 5px;
+	text-align: center;
+	width: 167px;
+}
+.statements_2 {
+	border-spacing: 5px;
+}
+#about {
+}
+#cantin {
+	padding-left: 23px;
+	width: 154px;
+	height: 200px;
+}
+#contact_us {
+	text-align: center;
 }
 #container {
 	background-color: #ffffff;
 }
 #content {
 	background-color: #ffffff;
-	line-height: 22px;
+	line-height: 28px;
 	margin: 0px auto;
 	padding-bottom: 85px;
-	width: 950px;
+	width: 700px;
 }
 #copyright {
 	color: #ffffff;
 	font-size: 12px;
-	padding-top: 50px;
+	padding: 10px;
 	text-align: center;
 	vertical-align: bottom;
 }
 #footer {
 	background-color: #96191d;
-	height: 200px;
+	height: 25px;
 	margin: 0px;
 	padding: 0px;
 }
@@ -84,16 +142,21 @@ td {
 	height: 80px;
 	padding-bottom: 10px;
 }
+#intro {
+	color: #ffffff;
+	width: 700px;
+	margin: 0px auto;
+	padding-top: 100px;
+}
 #logo {
 	padding-left: 50px;
 	padding-top: 10px;
 	user-select: none;
 }
 #main {
-	background-color: #999999;
-	font-size: 72px;
-	height: 400px;
-	text-align: center;
+	background-image: url("../images/main.png");
+	background-position: bottom;
+	height: 500px;
 }
 #navigation {
 	float: right;
