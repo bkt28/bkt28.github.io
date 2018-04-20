@@ -41,12 +41,12 @@ h3 {
 h4 {
 	text-align: center;
 }
-ul {
+/*ul {
 	line-height: 18px;
-}
-li {
+}*/
+/*li {
 	padding-bottom: 10px;
-}
+}*/
 .footer_table {
 	text-align: center;
 	width: 300px;
@@ -134,8 +134,8 @@ li {
 }
 #contact {
 	background: linear-gradient(
-      rgba(0, 0, 0, 0.5), 
-      rgba(0, 0, 0, 0.5)
+      rgba(0, 0, 0, 0.3), 
+      rgba(0, 0, 0, 0.3)
     ), url("images/DSC_0151.JPG");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -194,8 +194,8 @@ li {
 }
 #main {
 	background: linear-gradient(
-      rgba(0, 0, 0, 0.5), 
-      rgba(0, 0, 0, 0.5)
+      rgba(0, 0, 0, 0.3), 
+      rgba(0, 0, 0, 0.3)
     ), url("images/DSC_0248.JPG");
 	background-repeat: no-repeat;
 	background-size: cover;
