@@ -58,8 +58,11 @@ function appendButton(id, width, height, x, y, fill, stroke, activeFill,
 
 		});
 
-		var inactiveId = (id == "#button_1") ? "#button_2" : "#button_1";
-		console.log(d3.select(inactiveId));
+		if (id == "#button_1" || id == "#button_2")
+			var inactiveId = (id == "#button_1") ? "#button_2" : "#button_1";
+		
+		else if (id == "#button_3" || id == "#button_4")
+			var inactiveId = (id == "#button_3") ? "#button_4" : "#button_3";
 
 		d3.select(inactiveId).select("rect")
 		.style("fill", fill);
