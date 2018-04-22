@@ -134,8 +134,8 @@ h4 {
 }
 #contact {
 	background: linear-gradient(
-      rgba(0, 0, 0, 0.3), 
-      rgba(0, 0, 0, 0.3)
+      rgba(0, 0, 0, 0.4), 
+      rgba(0, 0, 0, 0.4)
     ), url("images/DSC_0151.JPG");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -177,6 +177,7 @@ h4 {
 }
 #intro {
 	color: #ffffff;
+	font-weight: bold;
 	width: 700px;
 	margin: 0px auto;
 	padding-top: 50px;
@@ -194,8 +195,8 @@ h4 {
 }
 #main {
 	background: linear-gradient(
-      rgba(0, 0, 0, 0.3), 
-      rgba(0, 0, 0, 0.3)
+      rgba(0, 0, 0, 0.4), 
+      rgba(0, 0, 0, 0.4)
     ), url("images/DSC_0248.JPG");
 	background-repeat: no-repeat;
 	background-size: cover;
